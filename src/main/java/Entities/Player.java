@@ -1,12 +1,11 @@
 package Entities;
 
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public abstract class Player {
 
-    static HashMap<Word, Boolean> dictionary;
-
-    abstract Word makeAMove();
+    abstract Word makeAMove() throws IOException;
 
 }
