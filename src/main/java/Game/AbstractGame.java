@@ -1,11 +1,14 @@
 package Game;
 
 
-import Entities.Player;
+import Entities.Word;
 
-public interface AbstractGame {
+public abstract class AbstractGame {
 
-    void start(Player... players);
-    void end();
-    static boolean acceptWord(){return false;}
+    static boolean acceptWord(Word word) {return false;}
+
+    //TODO Computer gets a word from source and returns it
+    public static Word computerMove() {
+        return null;
+    }
 }

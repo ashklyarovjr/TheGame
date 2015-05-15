@@ -7,7 +7,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ConnectorDB {
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection()  {
+
 
         ResourceBundle resourceBundle = ResourceBundle.getBundle("game");
 
@@ -15,7 +16,17 @@ public class ConnectorDB {
         String user = resourceBundle.getString("db.user");
         String pass = resourceBundle.getString("db.password");
 
-        return DriverManager.getConnection(url, user, pass);
+        Connection connection = null;
+        try {
+
+            connection = DriverManager.getConnection(url, user, pass);
+
+        } catch (SQLException e) {
+
+            System.out.println("Immpossible to connect to the DB!");
+
+        }
+        return connection;
     }
 
 

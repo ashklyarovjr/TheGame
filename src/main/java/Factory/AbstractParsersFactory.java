@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public abstract class AbstractParsersFactory {
 
-    public abstract AbstractParserInterface getParser() throws NoSuchParserException;
+    public abstract AbstractParserInterface getParser() throws NoSuchParserException, SQLException;
 
 
     BDParser getBDParser() throws SQLException {
