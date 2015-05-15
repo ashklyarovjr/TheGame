@@ -4,7 +4,7 @@ package Factory;
 import Parsers.BDParser;
 import Parsers.ExcelParser;
 import Parsers.FileParser;
-import Parsers.XMLParser;
+import Parsers.XMLParser.XMLParser;
 
 public interface AbstractParsersFactory {
     BDParser getBDParser();
