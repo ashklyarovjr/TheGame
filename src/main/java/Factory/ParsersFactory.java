@@ -1,30 +1,29 @@
 package Factory;
 
 
-import Parsers.BDParser;
-import Parsers.ExcelParser;
-import Parsers.FileParser;
-import Parsers.XMLParser.XMLParser;
+import Exceptions.NoSuchParserException;
+import Helpers.PathsKeeper;
+import Parsers.AbstractParserInterface;
 
-public class ParsersFactory implements AbstractParsersFactory {
+import java.util.ResourceBundle;
 
-    @Override
-    public BDParser getBDParser() {
-        return null;
-    }
+public class ParsersFactory extends AbstractParsersFactory {
 
     @Override
-    public ExcelParser getExcelParser() {
-        return null;
-    }
-
-    @Override
-    public FileParser getFileParser() {
-        return null;
-    }
-
-    @Override
-    public XMLParser getXMLParser() {
-        return null;
+    public AbstractParserInterface getParser() throws NoSuchParserException {
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(PathsKeeper.propertiesFile);
+        String type = resourceBundle.getString(PathsKeeper.parserChoice);
+        switch (type) {
+            case "xml":
+                return getXMLParser(resourceBundle.getString(PathsKeeper.xmlSource));
+            case "xls":
+                return getExcelParser(resourceBundle.getString(PathsKeeper.xlsSource));
+            case "json":
+                return getJSONParser(resourceBundle.getString(PathsKeeper.jsonSource));
+            case "txt":
+                return getFileParser(resourceBundle.getString(PathsKeeper.txtSource));
+            default:
+                throw new NoSuchParserException("You can't use such file as a cities source!!");
+        }
     }
 }

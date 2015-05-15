@@ -1,17 +1,32 @@
 package Factory;
 
 
-import Parsers.BDParser;
-import Parsers.ExcelParser;
-import Parsers.FileParser;
+import Exceptions.NoSuchParserException;
+import Parsers.*;
 import Parsers.XMLParser.XMLParser;
 
-public interface AbstractParsersFactory {
-    BDParser getBDParser();
+import java.sql.SQLException;
 
-    ExcelParser getExcelParser();
+public abstract class AbstractParsersFactory {
 
-    FileParser getFileParser();
+    public abstract AbstractParserInterface getParser() throws NoSuchParserException;
 
-    XMLParser getXMLParser();
+
+    BDParser getBDParser() throws SQLException {
+        return new BDParser();
+    }
+
+    ExcelParser getExcelParser(String filePath){
+        return new ExcelParser(filePath);
+    }
+
+    FileParser getFileParser(String filePath){
+        return new FileParser(filePath);
+    }
+
+    XMLParser getXMLParser(String filePath){
+        return new XMLParser(filePath);
+    }
+
+    JSONParser getJSONParser(String filePath) {return new JSONParser(filePath); }
 }

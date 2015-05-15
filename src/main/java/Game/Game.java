@@ -1,7 +1,9 @@
 package Game;
 
 
+import Entities.Player;
 import Entities.Word;
+import Factory.AbstractParsersFactory;
 
 import java.util.HashMap;
 
@@ -11,7 +13,7 @@ public class Game implements AbstractGame {
     static HashMap<Word, Boolean> dictionary;
 
     public Game() {
-
+        //AbstractParsersFactory factory =
     }
 
     public static HashMap<Word, Boolean> getDictionary() {
@@ -22,10 +24,13 @@ public class Game implements AbstractGame {
         Game.dictionary = dictionary;
     }
 
-    public void start() {
+
+    @Override
+    public void start(Player... players) {
 
     }
 
+    @Override
     public void end() {
 
     }

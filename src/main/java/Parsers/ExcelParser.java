@@ -1,7 +1,18 @@
 package Parsers;
 
-/**
- * Created by Anton_Shkliarov on 5/14/2015.
- */
-public class ExcelParser {
+import Entities.Word;
+
+import java.util.HashMap;
+
+
+public class ExcelParser extends AbstractParser implements AbstractParserInterface {
+
+    public ExcelParser(String filePath) {
+        super(filePath);
+    }
+
+    @Override
+    public HashMap<Word, Boolean> parse() {
+        return null;
+    }
 }
