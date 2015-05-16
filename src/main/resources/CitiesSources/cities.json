@@ -6,7 +6,6 @@
     "Baotou",
     "Hohhot",
     "Guiyang",
-
     "Yuanchang",
     "Hangbu",
     "Zhangjiang",
@@ -42,16 +41,10 @@
     "Dabu",
     "Luoyang",
     "Feiyun",
-
-
     "Bangkok",
-
-
     "Oceanside",
     "Redding",
-
     "Villa Park",
-
     "Annandale",
     "Norcross",
     "Hendersonville",
@@ -213,7 +206,6 @@
     "Greenwich",
     "Oklahoma City",
     "House Springs",
-
     "Belleville",
     "Catawissa",
     "Woodstock",
@@ -283,9 +275,7 @@
     "East Elmhurst",
     "Emeryville",
     "Pennington",
-
     "Morrisville",
-
     "San Leandro",
     "Somerville",
     "Kingman",
@@ -294,7 +284,6 @@
     "Crete",
     "Yulee",
     "Palm Bay",
-
     "DuPont",
     "Westfield",
     "Wendell",
@@ -302,9 +291,7 @@
     "Nixon",
     "Odessa",
     "Lexington",
-
     "Yukon",
-
     "Juneau",
     "Kake",
     "Fairbanks",
@@ -335,12 +322,9 @@
     "Victoria",
     "Kodak",
     "Alpharetta",
-
-
     "Weaverville",
     "Douglas City",
     "Chicago Heights",
-
     "Sealy",
     "Guilford",
     "Bridgeport",
@@ -350,12 +334,8 @@
     "Round Mountain",
     "South Lake Tahoe",
     "Bandon",
-
-
-
     "Playa del Rey",
     "South Portland",
-
     "Fremont",
     "Exeter",
     "Armagh",
@@ -364,15 +344,10 @@
     "Hooversville",
     "Listie",
     "Gifford",
-
-
     "Lewisburg",
     "Wyoming",
     "Ravencliff",
-
     "Killingworth",
-
-
     "Northumberland",
     "Winfield",
     "Middleburg",
@@ -485,26 +460,19 @@
     "Alma",
     "Elwell",
     "Avoca",
-
     "Bhandup",
     "Mumbai",
     "Visakhapatnam",
     "Coimbatore",
     "Delhi",
     "Bangalore",
-
-
     "Seoul",
-
-
     "Taipei",
     "Taoyuan",
     "Tuchang",
     "Hsinchu",
-
     "Manila",
     "Ayala",
-
     "Baguio City",
     "San Pablo City",
     "San Mateo",
@@ -23889,107 +23857,58 @@
     "Sofia",
 
     "Lisice",
-
     "Mauren",
-
     "Warsaw",
-
     "Dublin",
-
     "Zagreb",
-
     "Tallinn",
-
     "Riga",
-
     "Douglas",
-
     "Steinsel",
-
-
     "Yerevan",
-
     "Minsk",
-
     "Nairobi",
     "Mombasa",
-
     "Kuwait",
-
     "Santo Domingo",
-
     "Dorado",
-
-
     "Singapore",
-
-
     "Bandung",
     "Jakarta",
-
     "Karachi",
-
-
     "Panama City",
     "Santa Catalina",
-
-
     "Peru",
-
-
-
     "San Diego",
-
     "Mexico",
     "Santo Domingo",
-
     "Mercedes",
-
     "San Juan",
-
     "Cerro de Pasco",
     "Santiago",
-
     "Machu Picchu",
-
-
     "Belize City",
-
     "Uyo",
     "Mushin",
     "Port Harcourt",
     "Aba",
-
     "Agidingbi",
     "Ikotun",
     "Ajegunle",
     "Chafe",
     "Mogho",
-
     "Caracas",
-
     "Barcelona",
-
     "El Rosal",
     "La Verdad",
-    "Monte Cristo",
-
+    "Monte Crist",
     "Berrechid",
     "Safi",
-
-
-
     "Puerta Roja",
-
-
     "Warrens",
     "Bridgetown",
-
     "Cairo",
     "Alexandria",
-
-
-
     "Ensenada",
     "San Antonio Oeste",
     "Alejandro Korn",
@@ -24005,7 +23924,6 @@
     "San Francisco de Santa Fe",
     "Devoto",
     "Pico de Salamanca",
-
     "Palmira",
     "Allen",
     "Villa Insuperable",
@@ -24019,7 +23937,6 @@
     "Funes",
     "Avellaneda",
     "Canada Rosquin",
-
     "Justiniano Posse",
     "Roldan",
     "Mar del Tuyu",
@@ -24044,7 +23961,6 @@
     "Sierra de los Padres",
     "Santa Clara de Saguier",
     "Arroyito",
-
     "Centenario",
     "Canuelas",
     "Alvarez",
@@ -24067,7 +23983,6 @@
     "Eldorado",
     "Bustinza",
     "Vicuna Mackenna",
-
     "El Dorado",
     "Perico",
     "Villa Las Rosas",
@@ -24091,75 +24006,45 @@
     "Morteros",
     "Las Perdices",
     "Corral de Bustos",
-
-
-
     "Manama",
-
     "Palm Beach",
     "Oranjestad",
     "Sero Blanco",
     "Tanki Lender",
     "Santa Cruz",
-
-
     "Macao",
-
     "Kabul",
-
-
     "Tashkent",
-
     "Samarkand",
-
     "Budva",
-
     "Johannesburg",
-
-
     "Dushanbe",
     "Khorugh",
-
     "Gwanda",
-
     "Monrovia",
     "Fish Town",
     "Paynesville",
-
-
     "Antananarivo",
-
     "Kampala",
-
     "Saint Jean",
     "Algiers",
-
     "Niamey",
-
     "Pristina",
     "Ferizaj",
     "Mitrovica",
     "Dunavo",
     "Prizren",
-
     "Newlands",
-
     "Kingston",
-
     "Browns Town",
     "Moneague",
     "Black River",
-
     "Guatemala",
-
     "Central",
     "Flores",
     "Santa Rosa",
     "Monaco",
     "Monte Carlo",
-
-
-
     "Darganata",
     "Ashgabat",
     "Stanley",

@@ -8,6 +8,10 @@ import java.io.InputStreamReader;
 public class User extends Player {
 
 
+    public User(String name) {
+        super(name);
+    }
+
     private String consoleInput() throws IOException {
         BufferedReader reader  =  new BufferedReader(new InputStreamReader(System.in));
         return reader.readLine();

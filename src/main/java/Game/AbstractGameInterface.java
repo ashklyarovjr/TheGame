@@ -5,9 +5,14 @@ import Entities.Player;
 
 public interface AbstractGameInterface {
 
-    Player[] start(Player... players);
+    /**
+     * Method to determine quantity of players,
+     * how many AIs and how many Users will play.
+     * @return players - array of players.
+     * */
+    Player[] start();
 
-    void play();
+    void play(Player... players);
 
     void end();
 }

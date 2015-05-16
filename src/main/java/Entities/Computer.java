@@ -9,6 +9,10 @@ import java.io.InputStreamReader;
 
 public class Computer extends Player {
 
+    public Computer(String name) {
+        super(name);
+    }
+
     @Override
     Word makeAMove() {return Game.computerMove();}
 }
