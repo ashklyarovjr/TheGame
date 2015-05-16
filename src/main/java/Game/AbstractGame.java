@@ -4,7 +4,6 @@ package Game;
 import Entities.Computer;
 import Entities.Player;
 import Entities.User;
-import Entities.Word;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,16 +45,15 @@ public abstract class AbstractGame implements AbstractGameInterface {
                     players[i] = new Computer("AI" + i);
                 }
             }
-
+            reader.close();
         } catch (IOException e) {
             System.out.println("Incorrect input value, try again!");
             //Recursive call in case of exception
             start();
         }
+
         return players;
     }
 
-    public static Word computerMove() {
-        return null;
-    }
+
 }

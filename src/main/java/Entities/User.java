@@ -5,6 +5,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
+
 public class User extends Player {
 
 
@@ -12,13 +15,21 @@ public class User extends Player {
         super(name);
     }
 
-    private String consoleInput() throws IOException {
-        BufferedReader reader  =  new BufferedReader(new InputStreamReader(System.in));
-        return reader.readLine();
-    }
+    private String consoleInput() {
+        String word = null;
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+
+            word = reader.readLine();
+
+        } catch (IOException e) {
+            System.out.println("Invalid input value, try again!");
+        }
+
+    return word;
+}
 
     @Override
-    Word makeAMove() throws IOException {
+    public Word makeAMove() {
         String inputWord = consoleInput();
         return new Word(inputWord);
     }

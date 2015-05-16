@@ -1,12 +1,13 @@
 package Entities;
 
 
-import java.io.IOException;
-import java.util.HashMap;
+import java.io.BufferedReader;
 
 public abstract class Player {
 
     String name;
+
+    int countOfFails = 0;
 
     public Player(String name) {
         this.name = name;
@@ -20,6 +21,16 @@ public abstract class Player {
         this.name = name;
     }
 
-    abstract Word makeAMove() throws IOException;
+    public int getCountOfFails() {
+        return countOfFails;
+    }
+
+    public void setCountOfFails(int countOfFails) {
+        this.countOfFails = countOfFails;
+    }
+
+    public Word makeAMove() {
+        return null;
+    }
 
 }

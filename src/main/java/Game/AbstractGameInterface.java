@@ -3,6 +3,8 @@ package Game;
 
 import Entities.Player;
 
+import java.io.IOException;
+
 public interface AbstractGameInterface {
 
     /**
@@ -12,7 +14,14 @@ public interface AbstractGameInterface {
      * */
     static Player[] start(){return null;}
 
+
+    /**
+     * Method initiates process of the game.
+     * */
     void play();
 
+    /**
+     * Method clears all game resources.
+     * */
     void end();
 }

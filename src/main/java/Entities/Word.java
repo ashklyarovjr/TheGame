@@ -6,15 +6,20 @@ public class Word {
     char firstLetter;
     char lastLetter;
 
-    private char getFirstFromString(String word) {
-        return '0';
+    private char getFirstFromString() {
+
+        return getWord().charAt(0);
     }
-    private char getLastFromString(String word) {return '0';}
+    private char getLastFromString() {
+
+        return getWord().charAt(getWord().length() - 1);
+
+    }
 
     public Word(String word) {
         this.word = word;
-        setFirstLetter(getFirstFromString(getWord()));
-        setLastLetter(getLastFromString(getWord()));
+        setFirstLetter(getFirstFromString());
+        setLastLetter(getLastFromString());
     }
 
     public String getWord() {
