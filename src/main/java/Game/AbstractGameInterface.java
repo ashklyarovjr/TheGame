@@ -10,9 +10,9 @@ public interface AbstractGameInterface {
      * how many AIs and how many Users will play.
      * @return players - array of players.
      * */
-    Player[] start();
+    static Player[] start(){return null;}
 
-    void play(Player... players);
+    void play();
 
     void end();
 }

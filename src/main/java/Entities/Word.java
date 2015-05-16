@@ -40,4 +40,25 @@ public class Word {
     public void setLastLetter(char lastLetter) {
         this.lastLetter = lastLetter;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Word)) return false;
+
+        Word word1 = (Word) o;
+
+        if (firstLetter != word1.firstLetter) return false;
+        if (lastLetter != word1.lastLetter) return false;
+        return word.equals(word1.word);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = word.hashCode();
+        result = 31 * result + (int) firstLetter;
+        result = 31 * result + (int) lastLetter;
+        return result;
+    }
 }
