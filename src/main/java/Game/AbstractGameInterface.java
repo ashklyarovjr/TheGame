@@ -3,11 +3,25 @@ package Game;
 
 import Entities.Player;
 
+import java.io.IOException;
+
 public interface AbstractGameInterface {
 
-    Player[] start(Player... players);
+    /**
+     * Method to determine quantity of players,
+     * how many AIs and how many Users will play.
+     * @return players - array of players.
+     * */
+    static Player[] start(){return null;}
 
-    void play();
 
+    /**
+     * Method initiates process of the game.
+     * */
+    void play() throws IOException;
+
+    /**
+     * Method clears all game resources.
+     * */
     void end();
 }

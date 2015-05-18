@@ -1,21 +1,30 @@
 package Entities;
 
 
+import org.apache.log4j.Logger;
+
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class User extends Player {
 
+    private static final Logger logger = Logger.getLogger(User.class);
 
-    private String consoleInput() throws IOException {
-        BufferedReader reader  =  new BufferedReader(new InputStreamReader(System.in));
-        return reader.readLine();
+
+    public User(String name) {
+        super(name);
     }
 
+
     @Override
-    Word makeAMove() throws IOException {
-        String inputWord = consoleInput();
+    public Word makeAMove(BufferedReader reader) throws IOException {
+        String inputWord ;
+
+        System.out.println("Enter word, please.");
+
+        inputWord = reader.readLine();
+
+
         return new Word(inputWord);
     }
 }

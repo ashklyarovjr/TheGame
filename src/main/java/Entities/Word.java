@@ -6,15 +6,20 @@ public class Word {
     char firstLetter;
     char lastLetter;
 
-    private char getFirstFromString(String word) {
-        return '0';
+    private char getFirstFromString() {
+
+        return getWord().charAt(0);
     }
-    private char getLastFromString(String word) {return '0';}
+    private char getLastFromString() {
+
+        return getWord().charAt(getWord().length() - 1);
+
+    }
 
     public Word(String word) {
         this.word = word;
-        setFirstLetter(getFirstFromString(getWord()));
-        setLastLetter(getLastFromString(getWord()));
+        setFirstLetter(getFirstFromString());
+        setLastLetter(getLastFromString());
     }
 
     public String getWord() {
@@ -39,5 +44,26 @@ public class Word {
 
     public void setLastLetter(char lastLetter) {
         this.lastLetter = lastLetter;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Word)) return false;
+
+        Word word1 = (Word) o;
+
+        if (firstLetter != word1.firstLetter) return false;
+        if (lastLetter != word1.lastLetter) return false;
+        return word.equals(word1.word);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = word.hashCode();
+        result = 31 * result + (int) firstLetter;
+        result = 31 * result + (int) lastLetter;
+        return result;
     }
 }
