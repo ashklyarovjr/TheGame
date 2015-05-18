@@ -22,7 +22,7 @@ public class Game extends AbstractGame implements AbstractGameInterface {
 
     public Game() throws NoSuchParserException, SQLException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
+
         setDictionary(new ParsersFactory().getParser().parse());
         System.out.println("Set quantity of users: ");
 
