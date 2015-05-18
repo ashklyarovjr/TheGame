@@ -8,26 +8,28 @@ import Exceptions.NoSuchParserException;
 import Factory.ParsersFactory;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 
 public class WordsGame extends AbstractGame {
 
-    private static final Logger LOGGER = Logger.getLogger(WordsGame.class);
+    private static final Logger LOGGER_INFO = Logger.getLogger(WordsGame.class);
+
+    private static final Logger LOGGER_ERR = Logger.getLogger(WordsGame.class);
 
     static HashMap<Word, Boolean> dictionary;
 
     public WordsGame() throws NoSuchParserException, SQLException {
 
         //Setting list of words
-        LOGGER.info("Before setting dictionary");
-        setDictionary(new ParsersFactory().getParser().parse());
-        LOGGER.info("Dictionary set");
+        LOGGER_INFO.info("Before setting dictionary");
+        ParsersFactory factory = new ParsersFactory();
+        setDictionary(factory.getParser().parse());
+        LOGGER_INFO.info("Dictionary set");
     }
 
     public static HashMap<Word, Boolean> getDictionary() {
@@ -40,105 +42,165 @@ public class WordsGame extends AbstractGame {
 
 
     public static Word computerMove(Word word) {
-        LOGGER.info("Computer's saying");
-        if (word != null)  {
+        LOGGER_INFO.info("Computer's saying");
+        if (word != null) {
             Set<Word> cities = getDictionary().keySet();
 
             for (Word required : cities) {
-                if (required.getFirstLetter() == word.getLastLetter())
-                    LOGGER.info("Computer said a word,  OK");
-                    return word;
+
+                if (word.getLastLetter() == required.getFirstLetter()) {
+
+                    if (getDictionary().get(required)) {
+
+                        LOGGER_INFO.info("Computer said a word,  OK");
+
+                        getDictionary().put(required, false);
+
+                        return required;
+                    }
+                }
             }
         }
-        LOGGER.info("Computer can't find suitable word in the dictionary");
+        LOGGER_ERR.warn("Computer can't find suitable word in the dictionary");
         return null;
     }
 
     boolean acceptWord(Word word) {
         Set<Word> cities = null;
         try {
+
             cities = getDictionary().keySet();
-            LOGGER.info("");
+            LOGGER_INFO.info("");
+
         } catch (NullPointerException e) {
-            LOGGER.error("Null Pointer Exception, file not found");
+
+            LOGGER_INFO.error("Null Pointer Exception, parser doesn't work");
+
         }
+
 
         //Marks word presence in the dictionary
         boolean mark = false;
 
         //Check that word is in the dictionary
-        for (Word iterator : cities){
+        for (Word iterator : cities) {
             if (iterator.equals(word))
                 mark = true;
         }
 
         //Check that word has been used
         if (mark) {
-            if (getDictionary().get(word))
-                LOGGER.info("Word found,  OK");
+            if (getDictionary().get(word)) {
+                LOGGER_INFO.info("Word found,  OK");
+                getDictionary().put(word, false);
                 return true;
+            }
         }
+
         System.out.println("Sorry, but this word is absent in the dictionary or has been used.");
-        LOGGER.warn("There's no such word in the dictionary");
+        LOGGER_ERR.warn("There's no such word in the dictionary");
+
         return false;
     }
-
-
 
 
     @Override
     public void play() throws IOException {
         //Start
 
-        Player[] players = start();
-        LOGGER.info("Game start() method called");
+        List<Player> players = start();
+        LOGGER_INFO.info("Game start() method called");
 
         int i;
         Word previousWord = null;
         Word nextWord = null;
-        for (i = 0; i < players.length; ++i) {
-            LOGGER.info("Game cycle started");
-            if (i == players.length - 1) {
+        LOGGER_INFO.info("Game cycle started");
+
+        for (i = 0; i <= players.size(); ++i) {
+
+            LOGGER_INFO.info("Loop #" + i);
+
+            if (i == players.size()) {
+
                 i = 0;
+
             }
 
-            if (players[i].getCountOfFails() >= 3){
-                LOGGER.warn("Too many fails for one player");
-                System.out.println("Player " + players[i].getName() + " failed");
+
+            if (players.get(i).getCountOfFails() >= 3) {
+
+                LOGGER_ERR.warn("Too many fails for one player");
+                System.out.println("Player " + players.get(i).getName() + " failed");
                 break;
+
             }
 
-            if (players[i].getClass().isInstance(Computer.class)){
-                LOGGER.info("Before computerMove() call");
+            if (players.get(i) instanceof Computer) {
+
+                LOGGER_INFO.info("Before computerMove() call");
                 nextWord = computerMove(previousWord);
-                LOGGER.info("After computerMove() call");
-                if (nextWord == null){
-                    System.out.println("AI " + players[i].getName() + " lost" );
+
+                LOGGER_INFO.info("After computerMove() call");
+                if (nextWord == null) {
+
+                    System.out.println("AI " + players.get(i).getName() + " lost");
                     break;
+
                 }
 
             } else {
-                Word input = players[i].makeAMove(getReader());
 
-                if (acceptWord(input))
-                    nextWord = input;
-                else {
-                    int count = players[i].getCountOfFails();
+                System.out.println(players.get(i).getName() + "'s turn: ");
+                Word input = players.get(i).makeAMove(getReader());
 
-                    if (count >= 3) {
-                        LOGGER.warn("Too many fails for one player");
-                        System.out.println("Player " + players[i].getName() + " failed");
-                        break;
+                if (acceptWord(input)) {
+
+                    if (previousWord == null) {
+                        nextWord = input;
                     }
 
-                    players[i].setCountOfFails(++count);
+                    if (previousWord != null && previousWord.getLastLetter() == input.getFirstLetter()) {
+
+                        nextWord = input;
+
+                    } else if (previousWord != null && previousWord.getLastLetter() != input.getFirstLetter()) {
+                        LOGGER_ERR.error("Wrong word ingupt from user " + players.get(i).getName());
+                        System.out.println(players.get(i).getName() + " said wrong word. It doesn't match to the previous one");
+
+                        int count = players.get(i).getCountOfFails();
+
+                        players.get(i).setCountOfFails(++count);
+
+                    }
+
+                } else {
+
+                    int count = players.get(i).getCountOfFails();
+
+                    players.get(i).setCountOfFails(++count);
+                    if (count >= 3) {
+
+                        LOGGER_ERR.warn("Too many fails for one player");
+
+                        System.out.println("Player " + players.get(i).getName() + " failed completely");
+
+                        break;
+
+                    }
 
                 }
 
             }
-            System.out.println(players[i].getName() + " said: " +  nextWord);
 
-            previousWord = nextWord;
+            if (nextWord != null) {
+
+                System.out.println(players.get(i).getName() + " said: " + nextWord.getWord());
+
+                previousWord = nextWord;
+                nextWord = null;
+
+            }
+
         }
 
         end();
@@ -146,18 +208,23 @@ public class WordsGame extends AbstractGame {
 
     @Override
     public void end() {
-        LOGGER.info("end() method called");
+        LOGGER_INFO.info("end() method called");
+
         try {
+
             getReader().close();
-            LOGGER.info("reader closed");
+            LOGGER_INFO.info("reader closed");
+
         } catch (IOException e) {
+
+            LOGGER_ERR.error("static Buffered Reader doesn't exist in the Game or closed.");
             System.out.println("BufferedReader doesn't exist or ");
+
         }
-        
+
         setDictionary(null);
         System.out.println("Thanks for playing!");
     }
-
 
 
 }

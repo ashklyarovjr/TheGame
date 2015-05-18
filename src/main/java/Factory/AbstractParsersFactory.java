@@ -28,5 +28,5 @@ public abstract class AbstractParsersFactory {
         return new XMLParser(filePath);
     }
 
-    JSONParser getJSONParser(String filePath) {return new JSONParser(filePath); }
+    MyJSONParser getJSONParser(String filePath) {return new MyJSONParser(filePath); }
 }

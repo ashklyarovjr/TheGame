@@ -17,7 +17,6 @@ import static org.easymock.EasyMock.*;
 
 public class GameTests {
 
-    Word word;
 
     @TestSubject
     WordsGame game;
@@ -25,21 +24,25 @@ public class GameTests {
     @Mock
     AbstractParserInterface mock;
 
+    @Mock
+    Word mockedWord;
 
     @BeforeMethod
     public void setUp() throws Exception {
         game = new WordsGame();
-        word = new Word("Kiev");
+        mockedWord = new Word("Kiev");
 
     }
 
     @Test
     public void acceptWordTest() throws Exception {
-        expect(mock.parse());
+
+        /*expect(mock.parse()).andReturn(anyObject());
+        expect(mockedWord).asStub();
         replay(mock);
 
-        game.acceptWord(word);
-        verify(mock);
+        game.acceptWord(mockedWord);
+        verify(mock);*/
 
     }
 

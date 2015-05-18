@@ -8,7 +8,7 @@ public class Word {
 
     private char getFirstFromString() {
 
-        return getWord().charAt(0);
+        return getWord().toLowerCase().charAt(0);
     }
     private char getLastFromString() {
 
@@ -22,12 +22,17 @@ public class Word {
         setLastLetter(getLastFromString());
     }
 
+    public Word() {
+    }
+
     public String getWord() {
         return word;
     }
 
     public void setWord(String word) {
         this.word = word;
+        setFirstLetter(getFirstFromString());
+        setLastLetter(getLastFromString());
     }
 
     public char getFirstLetter() {

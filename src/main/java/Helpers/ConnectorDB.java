@@ -23,8 +23,7 @@ public class ConnectorDB {
 
         } catch (SQLException e) {
 
-            System.out.println("Immpossible to connect to the DB!");
-
+            System.out.println("Impossible to connect to the DB!");
         }
         return connection;
     }
