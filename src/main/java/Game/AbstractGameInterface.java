@@ -18,7 +18,7 @@ public interface AbstractGameInterface {
     /**
      * Method initiates process of the game.
      * */
-    void play();
+    void play() throws IOException;
 
     /**
      * Method clears all game resources.

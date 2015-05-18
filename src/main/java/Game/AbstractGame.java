@@ -4,6 +4,7 @@ package Game;
 import Entities.Computer;
 import Entities.Player;
 import Entities.User;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,12 +12,29 @@ import java.io.InputStreamReader;
 
 public abstract class AbstractGame implements AbstractGameInterface {
 
+    static final Logger logger = Logger.getLogger(AbstractGame.class);
+
+    public static BufferedReader getReader() {
+        return reader;
+    }
+
+
+    public static Player[] getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(Player[] players) {
+        AbstractGame.players = players;
+    }
+
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     static Player[]  players;
 
     protected static Player[] start() {
         int users;
         int comps;
-        try(BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+        try {
 
             //Requesting number of Users and Computers that we need to initialize
             System.out.println("Set quantity of users(1 by default): ");
@@ -45,9 +63,9 @@ public abstract class AbstractGame implements AbstractGameInterface {
                     players[i] = new Computer("AI" + i);
                 }
             }
-            reader.close();
         } catch (IOException e) {
             System.out.println("Incorrect input value, try again!");
+
             //Recursive call in case of exception
             start();
         }

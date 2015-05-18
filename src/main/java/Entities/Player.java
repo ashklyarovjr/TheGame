@@ -2,6 +2,7 @@ package Entities;
 
 
 import java.io.BufferedReader;
+import java.io.IOException;
 
 public abstract class Player {
 
@@ -29,7 +30,7 @@ public abstract class Player {
         this.countOfFails = countOfFails;
     }
 
-    public Word makeAMove() {
+    public Word makeAMove(BufferedReader reader) throws IOException {
         return null;
     }
 
