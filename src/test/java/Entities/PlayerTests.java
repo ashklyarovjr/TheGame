@@ -1,15 +1,19 @@
 package Entities;
 
 
-import org.testng.annotations.*;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.Matchers.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.io.BufferedReader;
 
 import static org.easymock.EasyMock.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.is;
 
 public class PlayerTests {
+
 
     private BufferedReader mock;
     private User user;
@@ -25,18 +29,20 @@ public class PlayerTests {
     @Test
     public void testUserMove() throws Exception {
 
-        expect(mock.readLine()).andReturn("String");
-        expect(mock.readLine()).andReturn("String");
+        String string = "String";
+        expect(mock.readLine()).andReturn(string);
         replay(mock);
 
-        assertThat(user.makeAMove(mock), instanceOf(Word.class));
-        assertThat(user.makeAMove(mock).getWord(), is("String"));
+        Word word = user.makeAMove(mock);
+        assertThat(word, instanceOf(Word.class));
+        assertThat(word.getWord(), is(string));
 
         verify(mock);
     }
 
     @AfterMethod
     public void tearDown() throws Exception {
+
         user = null;
         mock = null;
 

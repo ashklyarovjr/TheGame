@@ -249,7 +249,7 @@ public class WordsGame extends AbstractGame {
             System.out.println("BufferedReader doesn't exist or ");
 
         }
-        
+
         setDictionary(null);
         System.out.println("Thanks for playing!");
     }

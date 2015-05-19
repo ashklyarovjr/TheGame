@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class User extends Player {
 
+    private static final Logger LOGGER_ERR = Logger.getLogger(User.class);
 
     public User(String name) {
         super(name);
@@ -15,14 +16,26 @@ public class User extends Player {
 
 
     @Override
-    public Word makeAMove(BufferedReader reader) throws IOException {
+    public Word makeAMove(BufferedReader reader)  {
 
         String inputWord;
 
         System.out.println("Enter word, please.");
 
-        inputWord = reader.readLine();
+        try {
+            inputWord = reader.readLine();
 
-        return new Word(inputWord);
+            if (!inputWord.isEmpty()) {
+                return new Word(inputWord);
+            }
+            else
+                throw new IOException();
+
+        } catch (IOException  e) {
+            System.out.println("Incorrect value, please try again!");
+            LOGGER_ERR.warn("Incorrect value, please try again!");
+            makeAMove(reader);
+        }
+        return null;
     }
 }

@@ -60,7 +60,6 @@ public class MySAXHandler extends DefaultHandler {
 
             case "Cities":
 
-                System.out.println(getWordsList().toString());
                 break;
 
             case "City":
