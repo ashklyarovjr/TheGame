@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class AbstractGame implements AbstractGameInterface {
@@ -19,7 +20,7 @@ public abstract class AbstractGame implements AbstractGameInterface {
 
     private static final Logger LOGGER_ERR = Logger.getLogger(AbstractGame.class);
 
-    public static BufferedReader getReader() {
+    public BufferedReader getReader() {
         return reader;
     }
 
@@ -36,6 +37,8 @@ public abstract class AbstractGame implements AbstractGameInterface {
     static List<Player> players;
 
     protected static List<Player> start() {
+
+        setPlayers(new LinkedList<>());
 
         LOGGER_INFO.info("Start call");
         int users;
@@ -76,9 +79,9 @@ public abstract class AbstractGame implements AbstractGameInterface {
 
             }
 
-        } catch (IOException e) {
+        } catch (IOException | NumberFormatException e) {
 
-            LOGGER_ERR.error("Incorrect input value, start() recall");
+            LOGGER_ERR.error("Incorrect input value: " + e + "; start() recall");
             System.out.println("Incorrect input value, try again!");
 
             //Recursive call in case of exception
@@ -89,8 +92,10 @@ public abstract class AbstractGame implements AbstractGameInterface {
     }
 
     protected static User userInit(BufferedReader reader) throws IOException {
+
         System.out.println("Enter user name: ");
         LOGGER_INFO.info("Single User init");
+
         return new User(reader.readLine());
     }
 

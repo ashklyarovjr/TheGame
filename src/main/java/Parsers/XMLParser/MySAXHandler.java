@@ -8,7 +8,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.HashMap;
 
 
-public class SAXHandler extends DefaultHandler {
+public class MySAXHandler extends DefaultHandler {
 
     private static final Logger LOGGER_INFO = Logger.getLogger(XMLParser.class);
 
@@ -39,13 +39,15 @@ public class SAXHandler extends DefaultHandler {
 
         switch (qName) {
 
-            case "cities":
+            case "Cities":
 
                 setWordsList(new HashMap<>());
+
                 LOGGER_INFO.info("Words list set");
+
                 break;
 
-            case "city":
+            case "City":
 
                 setWord(new Word());
                 break;
@@ -56,15 +58,17 @@ public class SAXHandler extends DefaultHandler {
 
         switch (qName) {
 
-            case "cities":
+            case "Cities":
 
                 System.out.println(getWordsList().toString());
                 break;
 
-            case "city":
+            case "City":
 
                 getWord().setWord(content);
+
                 getWordsList().put(getWord(), true);
+
                 LOGGER_INFO.info("New city added");
                 break;
         }

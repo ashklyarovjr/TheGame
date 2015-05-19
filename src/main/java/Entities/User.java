@@ -17,7 +17,7 @@ public class User extends Player {
     @Override
     public Word makeAMove(BufferedReader reader) throws IOException {
 
-        String inputWord ;
+        String inputWord;
 
         System.out.println("Enter word, please.");
 

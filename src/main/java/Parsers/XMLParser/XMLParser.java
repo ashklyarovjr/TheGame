@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -19,7 +18,15 @@ public class XMLParser extends AbstractParser implements AbstractParserInterface
 
     private static final Logger LOGGER_ERR = Logger.getLogger(XMLParser.class);
 
-    private SAXHandler handler = null;
+    public MySAXHandler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(MySAXHandler handler) {
+        this.handler = handler;
+    }
+
+    MySAXHandler handler = null;
 
     public XMLParser(String filePath) {
         super(filePath);
@@ -33,10 +40,12 @@ public class XMLParser extends AbstractParser implements AbstractParserInterface
             javax.xml.parsers.SAXParser saxParser = saxParserFactory.newSAXParser();
 
 
-            handler = new SAXHandler();
+            setHandler(new MySAXHandler());
 
             LOGGER_INFO.info("XML parsing started");
-            saxParser.parse(getFilePath(), handler);
+
+            saxParser.parse(getFilePath(),getHandler());
+
             LOGGER_INFO.info("XML parsing finished");
 
 

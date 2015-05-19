@@ -12,7 +12,7 @@ public abstract class AbstractParsersFactory {
     public abstract AbstractParserInterface getParser() throws NoSuchParserException, SQLException;
 
 
-    BDParser getBDParser() throws SQLException {
+    BDParser getBDParser()  {
         return new BDParser();
     }
 

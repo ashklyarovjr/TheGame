@@ -1,49 +1,69 @@
 package Game;
 
 import Entities.Word;
-import Factory.ParsersFactory;
-import Parsers.AbstractParser;
-import Parsers.AbstractParserInterface;
-import org.easymock.Mock;
-import org.easymock.TestSubject;
+
+import org.testng.annotations.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-
-import static org.easymock.EasyMock.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 
 public class GameTests {
 
+    private Word wordInDict;
+    private Word wordOutOfDict;
+    private WordsGame game;
 
-    @TestSubject
-    WordsGame game;
 
-    @Mock
-    AbstractParserInterface mock;
+    @BeforeClass
+    public void setUpBeforeClass() {
+        game = new WordsGame();
+        wordInDict = new Word("Havana");
+        wordOutOfDict = new Word("Lalala");
+    }
 
-    @Mock
-    Word mockedWord;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        game = new WordsGame();
-        mockedWord = new Word("Kiev");
 
     }
 
     @Test
-    public void acceptWordTest() throws Exception {
+    public void acceptWordTestPositive() {
+        assertThat(game.acceptWord(wordInDict), is(true));
+    }
 
-        /*expect(mock.parse()).andReturn(anyObject());
-        expect(mockedWord).asStub();
-        replay(mock);
+    @Test
+    public void acceptWordTestWordNotFromDict() {
 
-        game.acceptWord(mockedWord);
-        verify(mock);*/
+        assertThat(game.acceptWord(wordOutOfDict), is(false));
+    }
 
+    @Test
+    public void acceptWordTestUsedWord() {
+        assertThat(game.acceptWord(wordInDict), is(false));
+    }
+
+    @Test
+    public void computerMovePositiveTest() {
+        Word word = game.computerMove(wordInDict);
+        assertThat(word, notNullValue());
+        assertThat(word, hasProperty("firstLetter", equalTo(wordInDict.getLastLetter())));
+    }
+
+    @Test
+    public void computerMoveNegativeTest() {
+        assertThat(game.computerMove(null), is(nullValue()));
+    }
+
+    @Test
+    public void endTest() {
+        game.end();
+        assertThat(game.getDictionary(),is(nullValue()));
     }
 
     @AfterMethod
@@ -51,4 +71,13 @@ public class GameTests {
 
 
     }
+
+    @AfterClass
+    public void tearDownAfterClass() {
+        game = null;
+        wordInDict = null;
+        wordOutOfDict = null;
+    }
+
+
 }

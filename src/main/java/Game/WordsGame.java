@@ -23,25 +23,35 @@ public class WordsGame extends AbstractGame {
 
     static HashMap<Word, Boolean> dictionary;
 
-    public WordsGame() throws NoSuchParserException, SQLException {
+    public WordsGame()  {
 
         //Setting list of words
         LOGGER_INFO.info("Before setting dictionary");
         ParsersFactory factory = new ParsersFactory();
-        setDictionary(factory.getParser().parse());
+        try {
+
+            setDictionary(factory.getParser().parse());
+
+        } catch (NoSuchParserException e) {
+
+            LOGGER_ERR.warn("Unable to get dictionary from that type of document, cause parser doesn't exist");
+            System.out.println("Sorry, game is unavailable at that moment, try again later.");
+
+            end();
+        }
         LOGGER_INFO.info("Dictionary set");
     }
 
-    public static HashMap<Word, Boolean> getDictionary() {
+    public HashMap<Word, Boolean> getDictionary() {
         return dictionary;
     }
 
-    public static void setDictionary(HashMap<Word, Boolean> dictionary) {
+    public void setDictionary(HashMap<Word, Boolean> dictionary) {
         WordsGame.dictionary = dictionary;
     }
 
 
-    public static Word computerMove(Word word) {
+    Word computerMove(Word word) {
         LOGGER_INFO.info("Computer's saying");
         if (word != null) {
             Set<Word> cities = getDictionary().keySet();
@@ -72,9 +82,11 @@ public class WordsGame extends AbstractGame {
             cities = getDictionary().keySet();
             LOGGER_INFO.info("");
 
+
+
         } catch (NullPointerException e) {
 
-            LOGGER_INFO.error("Null Pointer Exception, parser doesn't work");
+            LOGGER_ERR.error("Null Pointer Exception, parser doesn't work");
 
         }
 
@@ -98,6 +110,7 @@ public class WordsGame extends AbstractGame {
         }
 
         System.out.println("Sorry, but this word is absent in the dictionary or has been used.");
+
         LOGGER_ERR.warn("There's no such word in the dictionary");
 
         return false;
@@ -115,10 +128,20 @@ public class WordsGame extends AbstractGame {
         Word previousWord = null;
         Word nextWord = null;
         LOGGER_INFO.info("Game cycle started");
-
+        int j = 0;
         for (i = 0; i <= players.size(); ++i) {
 
-            LOGGER_INFO.info("Loop #" + i);
+            LOGGER_INFO.info("Loop #" + j);
+            j++;
+
+            if (players.size() == 1) {
+
+                System.out.println(players.get(0).getName() + " won!");
+
+                System.out.println("Game over!");
+
+                break;
+            }
 
             if (i == players.size()) {
 
@@ -156,7 +179,9 @@ public class WordsGame extends AbstractGame {
                 if (acceptWord(input)) {
 
                     if (previousWord == null) {
+
                         nextWord = input;
+
                     }
 
                     if (previousWord != null && previousWord.getLastLetter() == input.getFirstLetter()) {
@@ -164,7 +189,8 @@ public class WordsGame extends AbstractGame {
                         nextWord = input;
 
                     } else if (previousWord != null && previousWord.getLastLetter() != input.getFirstLetter()) {
-                        LOGGER_ERR.error("Wrong word ingupt from user " + players.get(i).getName());
+
+                        LOGGER_ERR.error("Wrong word input from user " + players.get(i).getName());
                         System.out.println(players.get(i).getName() + " said wrong word. It doesn't match to the previous one");
 
                         int count = players.get(i).getCountOfFails();
@@ -178,13 +204,14 @@ public class WordsGame extends AbstractGame {
                     int count = players.get(i).getCountOfFails();
 
                     players.get(i).setCountOfFails(++count);
+
                     if (count >= 3) {
 
                         LOGGER_ERR.warn("Too many fails for one player");
 
                         System.out.println("Player " + players.get(i).getName() + " failed completely");
 
-                        break;
+                        players.remove(i);
 
                     }
 
@@ -218,10 +245,11 @@ public class WordsGame extends AbstractGame {
         } catch (IOException e) {
 
             LOGGER_ERR.error("static Buffered Reader doesn't exist in the Game or closed.");
+
             System.out.println("BufferedReader doesn't exist or ");
 
         }
-
+        
         setDictionary(null);
         System.out.println("Thanks for playing!");
     }

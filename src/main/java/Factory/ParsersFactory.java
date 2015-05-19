@@ -16,7 +16,7 @@ public class ParsersFactory extends AbstractParsersFactory {
     private static final Logger LOGGER_ERR = Logger.getLogger(ParsersFactory.class);
 
     @Override
-    public AbstractParserInterface getParser() throws NoSuchParserException, SQLException {
+    public AbstractParserInterface getParser() throws NoSuchParserException {
 
         ResourceBundle resourceBundle = ResourceBundle.getBundle(PathsKeeper.propertiesFile);
 

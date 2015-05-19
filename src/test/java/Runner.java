@@ -9,7 +9,7 @@ import java.io.IOException;
 public class Runner {
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
         TestNG testNG = new TestNG();
-        new Parser("textng.xml").parseToList().forEach(testNG::setCommandLineSuite);
+        new Parser("testng.xml").parseToList().forEach(testNG::setCommandLineSuite);
         testNG.run();
     }
 }

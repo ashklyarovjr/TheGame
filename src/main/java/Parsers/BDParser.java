@@ -19,7 +19,7 @@ public class BDParser extends AbstractParser implements AbstractParserInterface 
 
     private Connection connection;
 
-    public BDParser() throws SQLException {
+    public BDParser()  {
 
         setConnection(ConnectorDB.getConnection());
         LOGGER_INFO.info("BD: Connection established");
