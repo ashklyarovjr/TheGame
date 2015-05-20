@@ -73,9 +73,9 @@ public abstract class AbstractGame implements AbstractGameInterface {
             //Initializing players in the array
             for (int i = 0; i < users + comps; i++) {
                 if (i < users)
-                    getPlayers().add(userInit(reader));
+                    players.add(userInit(reader));
                 else
-                   getPlayers().add(new Computer("AI" + i));
+                   players.add(new Computer("AI" + i));
 
             }
 
@@ -88,7 +88,7 @@ public abstract class AbstractGame implements AbstractGameInterface {
             start();
         }
         LOGGER_INFO.info("Start method end");
-        return getPlayers();
+        return players;
     }
 
     protected static User userInit(BufferedReader reader) throws IOException {

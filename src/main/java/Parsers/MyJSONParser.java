@@ -34,7 +34,8 @@ public class MyJSONParser extends AbstractParser implements AbstractParserInterf
 
             }
         } catch (IOException | NullPointerException | ParseException e) {
-            e.printStackTrace();
+
+
         }
         return cities;
 

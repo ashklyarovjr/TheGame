@@ -23,7 +23,7 @@ public class WordsGame extends AbstractGame {
 
     static HashMap<Word, Boolean> dictionary;
 
-    public WordsGame()  {
+    public WordsGame() {
 
         //Setting list of words
         LOGGER_INFO.info("Before setting dictionary");
@@ -52,25 +52,26 @@ public class WordsGame extends AbstractGame {
 
 
     Word computerMove(Word word) {
+
         LOGGER_INFO.info("Computer's saying");
-        if (word != null) {
-            Set<Word> cities = getDictionary().keySet();
 
-            for (Word required : cities) {
+        Set<Word> cities = getDictionary().keySet();
 
-                if (word.getLastLetter() == required.getFirstLetter()) {
+        for (Word required : cities) {
 
-                    if (getDictionary().get(required)) {
+            if (word.getLastLetter() == required.getFirstLetter()) {
 
-                        LOGGER_INFO.info("Computer said a word,  OK");
+                if (getDictionary().get(required)) {
 
-                        getDictionary().put(required, false);
+                    LOGGER_INFO.info("Computer said a word,  OK");
 
-                        return required;
-                    }
+                    getDictionary().put(required, false);
+
+                    return required;
                 }
             }
         }
+
         LOGGER_ERR.warn("Computer can't find suitable word in the dictionary");
         return null;
     }
@@ -81,8 +82,6 @@ public class WordsGame extends AbstractGame {
 
             cities = getDictionary().keySet();
             LOGGER_INFO.info("");
-
-
 
         } catch (NullPointerException e) {
 
@@ -102,7 +101,9 @@ public class WordsGame extends AbstractGame {
 
         //Check that word has been used
         if (mark) {
+
             if (getDictionary().get(word)) {
+
                 LOGGER_INFO.info("Word found,  OK");
                 getDictionary().put(word, false);
                 return true;
@@ -119,21 +120,26 @@ public class WordsGame extends AbstractGame {
 
     @Override
     public void play() throws IOException {
-        //Start
 
+        //Start
         List<Player> players = start();
         LOGGER_INFO.info("Game start() method called");
 
-        int i;
         Word previousWord = null;
         Word nextWord = null;
+
         LOGGER_INFO.info("Game cycle started");
+
+        int i;
+
         int j = 0;
+
         for (i = 0; i <= players.size(); ++i) {
 
             LOGGER_INFO.info("Loop #" + j);
             j++;
 
+            //If quantity of players in the list is 1, then we have a winner
             if (players.size() == 1) {
 
                 System.out.println(players.get(0).getName() + " won!");
@@ -143,13 +149,14 @@ public class WordsGame extends AbstractGame {
                 break;
             }
 
+            //Continuing for loop to the infinity
             if (i == players.size()) {
 
                 i = 0;
 
             }
 
-
+            //Checks that player hasn't enough failures to loose
             if (players.get(i).getCountOfFails() >= 3) {
 
                 LOGGER_ERR.warn("Too many fails for one player");
@@ -157,7 +164,7 @@ public class WordsGame extends AbstractGame {
                 break;
 
             }
-
+            //If player is Computer.class run computerMove()
             if (players.get(i) instanceof Computer) {
 
                 LOGGER_INFO.info("Before computerMove() call");
@@ -170,42 +177,40 @@ public class WordsGame extends AbstractGame {
                     break;
 
                 }
-
+                //If player is User.class run user's makeAMove() method
             } else {
 
                 System.out.println(players.get(i).getName() + "'s turn: ");
+
                 Word input = players.get(i).makeAMove(getReader());
 
                 if (acceptWord(input)) {
-
+                    //For the first iteration
                     if (previousWord == null) {
 
                         nextWord = input;
 
                     }
-
+                    //One other iterations, perfect situation;
                     if (previousWord != null && previousWord.getLastLetter() == input.getFirstLetter()) {
 
                         nextWord = input;
-
+                        //If user entered a word, that is in the dictionary, but it doesn't match to the previous word
                     } else if (previousWord != null && previousWord.getLastLetter() != input.getFirstLetter()) {
 
                         LOGGER_ERR.error("Wrong word input from user " + players.get(i).getName());
                         System.out.println(players.get(i).getName() + " said wrong word. It doesn't match to the previous one");
 
-                        int count = players.get(i).getCountOfFails();
-
-                        players.get(i).setCountOfFails(++count);
+                        //Count of fails increment call
+                        countOfFailsIncrement(players.get(i));
 
                     }
 
                 } else {
 
-                    int count = players.get(i).getCountOfFails();
+                    countOfFailsIncrement(players.get(i));
 
-                    players.get(i).setCountOfFails(++count);
-
-                    if (count >= 3) {
+                    if (players.get(i).getCountOfFails() >= 3) {
 
                         LOGGER_ERR.warn("Too many fails for one player");
 
@@ -233,6 +238,16 @@ public class WordsGame extends AbstractGame {
         end();
     }
 
+    /**
+     * Increments count of fails by 1 for the Player
+     *
+     * @param player - incoming player
+     */
+    private void countOfFailsIncrement(Player player) {
+        int count = player.getCountOfFails();
+        player.setCountOfFails(++count);
+    }
+
     @Override
     public void end() {
         LOGGER_INFO.info("end() method called");
@@ -246,7 +261,7 @@ public class WordsGame extends AbstractGame {
 
             LOGGER_ERR.error("static Buffered Reader doesn't exist in the Game or closed.");
 
-            System.out.println("BufferedReader doesn't exist or ");
+            System.out.println("BufferedReader doesn't exist or closed");
 
         }
 

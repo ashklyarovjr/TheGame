@@ -55,16 +55,15 @@ public class GameTests {
         assertThat(word, hasProperty("firstLetter", equalTo(wordInDict.getLastLetter())));
     }
 
-    @Test
-    public void computerMoveNegativeTest() {
-        assertThat(game.computerMove(null), is(nullValue()));
-    }
 
     @Test
     public void endTest() {
         game.end();
         assertThat(game.getDictionary(),is(nullValue()));
     }
+
+    
+
 
     @AfterMethod
     public void tearDown() throws Exception {

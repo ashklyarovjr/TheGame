@@ -32,8 +32,10 @@ public class User extends Player {
                 throw new IOException();
 
         } catch (IOException  e) {
+
             System.out.println("Incorrect value, please try again!");
             LOGGER_ERR.warn("Incorrect value, please try again!");
+
             makeAMove(reader);
         }
         return null;
