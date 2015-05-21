@@ -202,13 +202,13 @@ public class WordsGame extends AbstractGame {
                         System.out.println(players.get(i).getName() + " said wrong word. It doesn't match to the previous one");
 
                         //Count of fails increment call
-                        countOfFailsIncrement(players.get(i));
+                        players.get(i).countOfFailsIncrement();
 
                     }
 
                 } else {
 
-                    countOfFailsIncrement(players.get(i));
+                    players.get(i).countOfFailsIncrement();
 
                     if (players.get(i).getCountOfFails() >= 3) {
 
@@ -238,15 +238,8 @@ public class WordsGame extends AbstractGame {
         end();
     }
 
-    /**
-     * Increments count of fails by 1 for the Player
-     *
-     * @param player - incoming player
-     */
-    private void countOfFailsIncrement(Player player) {
-        int count = player.getCountOfFails();
-        player.setCountOfFails(++count);
-    }
+
+
 
     @Override
     public void end() {

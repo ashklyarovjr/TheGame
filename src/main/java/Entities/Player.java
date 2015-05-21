@@ -7,7 +7,7 @@ public abstract class Player {
 
     String name;
 
-    int countOfFails = 0;
+    private int countOfFails = 0;
 
     public Player(String name) {
         this.name = name;
@@ -31,6 +31,11 @@ public abstract class Player {
 
     public Word makeAMove(BufferedReader reader)  {
         return null;
+    }
+
+    public void countOfFailsIncrement() {
+        int count = this.getCountOfFails();
+        this.setCountOfFails(++count);
     }
 
 }

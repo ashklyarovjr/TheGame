@@ -34,6 +34,7 @@ public class GameTests {
 
     @Test
     public void acceptWordTestPositive() {
+
         assertThat(game.acceptWord(wordInDict), is(true));
     }
 
@@ -62,7 +63,7 @@ public class GameTests {
         assertThat(game.getDictionary(),is(nullValue()));
     }
 
-    
+
 
 
     @AfterMethod
