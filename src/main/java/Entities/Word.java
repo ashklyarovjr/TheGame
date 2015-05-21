@@ -20,15 +20,13 @@ public class Word {
     }
 
     public char getFirstLetter() {
-        char first = word.toLowerCase().charAt(0);
-        return first;
+        return word.toLowerCase().charAt(0);
     }
 
 
 
     public char getLastLetter() {
-        char last = word.charAt(word.length() - 1);
-        return last;
+        return word.charAt(word.length() - 1);
     }
 
     @Override
