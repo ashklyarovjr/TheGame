@@ -53,23 +53,26 @@ public class WordsGame extends AbstractGame {
 
     Word computerMove(Word word) {
 
-        LOGGER_INFO.info("Computer's saying");
+        if (word != null) {
+            LOGGER_INFO.info("Computer's saying");
 
-        Set<Word> cities = getDictionary().keySet();
+            Set<Word> cities = getDictionary().keySet();
 
-        for (Word required : cities) {
+            for (Word required : cities) {
 
-            if (word.getLastLetter() == required.getFirstLetter()) {
+                if (word.getLastLetter() == required.getFirstLetter()) {
 
-                if (getDictionary().get(required)) {
+                    if (getDictionary().get(required)) {
 
-                    LOGGER_INFO.info("Computer said a word,  OK");
+                        LOGGER_INFO.info("Computer said a word,  OK");
 
-                    getDictionary().put(required, false);
+                        getDictionary().put(required, false);
 
-                    return required;
+                        return required;
+                    }
                 }
             }
+
         }
 
         LOGGER_ERR.warn("Computer can't find suitable word in the dictionary");
@@ -78,6 +81,7 @@ public class WordsGame extends AbstractGame {
 
     boolean acceptWord(Word word) {
         Set<Word> cities = null;
+
         try {
 
             cities = getDictionary().keySet();
@@ -237,8 +241,6 @@ public class WordsGame extends AbstractGame {
 
         end();
     }
-
-
 
 
     @Override

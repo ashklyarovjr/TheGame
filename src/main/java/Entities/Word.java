@@ -20,16 +20,30 @@ public class Word {
     }
 
     public char getFirstLetter() {
-        return getWord().toLowerCase().charAt(0);
+        char first = word.toLowerCase().charAt(0);
+        return first;
     }
 
 
 
     public char getLastLetter() {
-        return getWord().charAt(getWord().length() - 1);
+        char last = word.charAt(word.length() - 1);
+        return last;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        Word word1 = (Word) o;
 
+        return !(word != null ? !word.equals(word1.word) : word1.word != null);
 
+    }
+
+    @Override
+    public int hashCode() {
+        return word != null ? word.hashCode() : 0;
+    }
 }
